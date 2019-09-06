@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from PyQt4 import QtGui
+from PyQt5.QtWidgets import QApplication,QLabel
+from PyQt5.QtGui import QPixmap
 
-
-def show_image(image_path='s_pycharm.jpg'):
-    app = QtGui.QApplication(sys.argv)
-    pixmap = QtGui.QPixmap(image_path)
-    screen = QtGui.QLabel()
+def show_image(image_path='vscode.png'):
+    app = QApplication(sys.argv)
+    pixmap = QPixmap(image_path)
+    screen = QLabel()
     screen.setPixmap(pixmap)
     screen.showFullScreen()
     sys.exit(app.exec_())

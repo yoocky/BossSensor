@@ -1,13 +1,14 @@
 # -*- coding:utf-8 -*-
 import cv2
-
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from boss_train import Model
 from image_show import show_image
 
 
 if __name__ == '__main__':
     cap = cv2.VideoCapture(0)
-    cascade_path = "/usr/local/opt/opencv/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+    cascade_path = "/Users/Yoocky/anaconda3/pkgs/opencv3-3.1.0-py35_0/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
     model = Model()
     model.load()
     while True:

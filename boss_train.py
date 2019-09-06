@@ -3,7 +3,7 @@ from __future__ import print_function
 import random
 
 import numpy as np
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
@@ -102,7 +102,7 @@ class Model(object):
 
         self.model.summary()
 
-    def train(self, dataset, batch_size=32, nb_epoch=40, data_augmentation=True):
+    def train(self, dataset, batch_size=32, epochs=40, data_augmentation=True):
         # let's train the model using SGD + momentum (how original).
         sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
         self.model.compile(loss='categorical_crossentropy',
@@ -112,7 +112,7 @@ class Model(object):
             print('Not using data augmentation.')
             self.model.fit(dataset.X_train, dataset.Y_train,
                            batch_size=batch_size,
-                           nb_epoch=nb_epoch,
+                           epochs=epochs,
                            validation_data=(dataset.X_valid, dataset.Y_valid),
                            shuffle=True)
         else:
@@ -139,7 +139,7 @@ class Model(object):
             self.model.fit_generator(datagen.flow(dataset.X_train, dataset.Y_train,
                                                   batch_size=batch_size),
                                      samples_per_epoch=dataset.X_train.shape[0],
-                                     nb_epoch=nb_epoch,
+                                     epochs=epochs,
                                      validation_data=(dataset.X_valid, dataset.Y_valid))
 
     def save(self, file_path=FILE_PATH):
@@ -175,7 +175,7 @@ if __name__ == '__main__':
 
     model = Model()
     model.build_model(dataset)
-    model.train(dataset, nb_epoch=10)
+    model.train(dataset, epochs=10)
     model.save()
 
     model = Model()
