@@ -141,3 +141,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# data
+data/boss
+data/other
+data/video
+store
